@@ -1,0 +1,22 @@
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 28px;
+}
+
+.t {
+  background: white
+}
+
+.t2 {
+  background: black
+}
+
+.invert .t {
+  background: black
+}
+
+.invert .t2 {
+  background: white
+}
+

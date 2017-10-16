@@ -1,7 +1,7 @@
 'use strict';
 
-let SIZE = 5,
-    NUMBEROFBOMBS = 2,
+let SIZE,
+    NUMBEROFBOMBS,
     ISEND,
     bombsLeft,
     body,
@@ -18,9 +18,9 @@ function setAllClicked() {
 }
 
 function checkIfWin() {
-    let arr = document.getElementsByClassName("clicked");
-    let arr1 = document.getElementsByClassName("flag");
-    if (arr.length - arr1.length === SIZE*SIZE - NUMBEROFBOMBS) return true;
+    let clickedElements = document.getElementsByClassName("clicked");
+	///console.log(SIZE*SIZE - arr.length, NUMBEROFBOMBS);
+    if (SIZE*SIZE - clickedElements.length  ===  NUMBEROFBOMBS) return true;
     return false;
 }
 
@@ -46,7 +46,7 @@ function setFlag(cell){
         if  (!cell.classList.contains('flag') && !cell.classList.contains('clicked')&& bombsLeft>0){
                 cell.innerHTML += '&#9873';
                 cell.classList.add('flag');
-                cell.classList.add('clicked');
+                //cell.classList.add('clicked');
 
                 bombsLeft-=1;
                 updateBombsNumber(bombsLeft);
@@ -54,7 +54,7 @@ function setFlag(cell){
         else if(cell.classList.contains('flag') && !checkIfWin()) {
                 cell.innerHTML = '';
                 cell.classList.remove('flag');
-                cell.classList.remove('clicked');
+                //cell.classList.remove('clicked');
                 bombsLeft+=1;
                 updateBombsNumber(bombsLeft);
             }
@@ -72,7 +72,8 @@ function rightclick(cell) {
 }
 
 function cellClicked(cell){
-            if (!cell.classList.contains('clicked') && (cell.tagName === 'TD')){
+            if (!cell.classList.contains('clicked') && (cell.tagName === 'TD')
+				&& (!cell.classList.contains('flag'))){
                 if (find(bombsCoordinates, [cell.cellIndex, cell.parentNode.rowIndex])){
                     cell.innerHTML += '&#9881';
                     cell.className = "red";
@@ -101,6 +102,7 @@ function cellClicked(cell){
             } else {
                cell.classList.add('clicked');
             }
+			//console.log(checkIfWin());
 }
 
 
@@ -217,10 +219,10 @@ function generateBombsCoordinates () {
 }
 
 function newGame() {
-    SIZE = prompt('Введите размер поля (5 - 10)', 10);
-    NUMBEROFBOMBS = prompt('Введите количество бомб (2 - 10)', 5);
-    if (SIZE < 5 || SIZE > 10) SIZE = 10;
-    if (NUMBEROFBOMBS < 2 || NUMBEROFBOMBS > 10) NUMBEROFBOMBS = 5;
+    SIZE = Number(prompt('Введите размер поля ', 10));
+    NUMBEROFBOMBS = Number(prompt('Введите количество бомб', 8));
+    //if (SIZE < 5 || SIZE > 10) SIZE = 10;
+    //if (NUMBEROFBOMBS < 1 || NUMBEROFBOMBS > 10) NUMBEROFBOMBS = 5;
     bombsCoordinates = generateBombsCoordinates();
     body = document.getElementsByTagName('body')[0];
 

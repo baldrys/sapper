@@ -19,7 +19,7 @@ function setAllClicked() {
 
 function checkIfWin() {
     let clickedElements = document.getElementsByClassName("clicked");
-	///console.log(SIZE*SIZE - arr.length, NUMBEROFBOMBS);
+	//console.log(SIZE*SIZE - clickedElements.length, NUMBEROFBOMBS);
     if (SIZE*SIZE - clickedElements.length  ===  NUMBEROFBOMBS) return true;
     return false;
 }
@@ -68,7 +68,7 @@ function rightclick(cell) {
     let e = window.event;
     if (e.which) rightclick = (e.which === 3);
     else if (e.button) rightclick = (e.button === 2);
-    setFlag(cell); // true or false, you can trap right click here by if comparison
+    setFlag(cell);
 }
 
 function cellClicked(cell){
@@ -99,10 +99,10 @@ function cellClicked(cell){
                     }
                 }
 
-            } else {
+            } /*else {
                cell.classList.add('clicked');
             }
-			//console.log(checkIfWin());
+			console.log(checkIfWin());*/
 }
 
 

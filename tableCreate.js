@@ -114,7 +114,7 @@ function emptyCell(cell){
                 let newCell = document.getElementById('myTable').rows[j].cells[i];
                 let neWbombNumber = numberOfBombsNear(newCell);
 
-                if (!newCell.classList.contains('clicked')) {
+                if (!newCell.classList.contains('clicked') && (!newCell.classList.contains('flag'))) {
                     if (neWbombNumber === 0) {
                         newCell.className = 'grey';
                         newCell.classList.add('clicked');

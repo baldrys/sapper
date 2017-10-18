@@ -8,6 +8,27 @@ let SIZE,
     divParent,
     bombsCoordinates;
 
+function getNumEnding(iNumber) {   
+    let aEndings = ['у','ы',''];
+    var sEnding, i;
+    iNumber = iNumber % 100;
+    if (iNumber>=11 && iNumber<=19) {
+        sEnding=aEndings[2];
+    }
+    else {
+        i = iNumber % 10;
+        switch (i)
+        {
+            case (1): sEnding = aEndings[0]; break;
+            case (2):
+            case (3):
+            case (4): sEnding = aEndings[1]; break;
+            default: sEnding = aEndings[2];
+        }
+    }
+    return sEnding;
+}
+
 function selectColorForNumber(number) {
     switch(number){
         case 1:
@@ -176,7 +197,8 @@ function showBombsNumber(bombs) {
     let template = document.getElementById('template-bomb-number');
     let div = document.createElement('div');
     div.setAttribute('id', 'div-bomb-message');
-    div.innerHTML = template.textContent.replace("{{bomb_number}}", bombs);
+    div.innerHTML = template.textContent.replace("{{bomb_number}}", bombs).replace("{{end}}", getNumEnding(bombs));
+    //div.innerHTML = template.textContent.replace("{{end}}", getNumEnding(bombs));
     divParent.insertBefore(div, document.getElementById('myTable'))
     //divParent.appendChild(div);
 }

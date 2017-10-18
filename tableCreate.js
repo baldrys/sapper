@@ -8,6 +8,21 @@ let SIZE,
     divParent,
     bombsCoordinates;
 
+function selectColorForNumber(number) {
+    switch(number){
+        case 1:
+            return '#0000FF';
+        case 2:
+            return '#008000';
+        case 3:
+            return '#FF0000';
+        case 4:
+            return '#00008B';
+        case 5:
+            return '#8B0000';    
+    }
+}
+
 function setAllClicked() {
     let tds = document.getElementsByTagName('td');
     for (let i = 0; i < tds.length; ++i) {
@@ -91,7 +106,11 @@ function cellClicked(cell){
                         emptyCell(cell);
                     }
                     else {
+                       //cell.classList.add(selectColorForNumber(bombNumber));
+					   cell.style.color = selectColorForNumber(bombNumber);
                        cell.innerHTML += bombNumber;
+					   
+                       cell.style.color = selectColorForNumber(bombNumber);
                        cell.classList.add('clicked');
                     }
                     if (checkIfWin()) {
@@ -122,7 +141,12 @@ function emptyCell(cell){
                     }
                     else {
                         newCell.classList.add('clicked');
+						
+                        //newCell.classList.add(selectColorForNumber(neWbombNumber));
+						newCell.style.color = selectColorForNumber(neWbombNumber);
                         newCell.innerHTML += neWbombNumber;
+                        
+						
 
                     }
 
@@ -237,3 +261,4 @@ function newGame() {
 }
 
 newGame();
+//console.log(selectColorForNumber(1));

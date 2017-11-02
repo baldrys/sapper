@@ -1,22 +1,76 @@
+table{
+	margin:auto;
+	border: 2px solid black;
+
+}
 td {
   border: 1px solid black;
   border-collapse: collapse;
-  padding: 28px;
+	font-weight: 600;
+	color: black;
+  width:50px; 
+  height:50px;
+  text-align:center; 
+  vertical-align:middle;
 }
 
-.t {
-  background: white
+.red {
+	font-size: 25pt;
+	background: red
 }
 
-.t2 {
-  background: black
+.grey{
+	background: #E8E8E8
 }
 
-.invert .t {
-  background: black
+.flag{
+	font-size: 25pt;
+	color: red
 }
 
-.invert .t2 {
-  background: white
+.bombs{
+	width: 560px;	
+	height: 25px;
+	outline: 2px solid #000;
+	text-align:center; 
+  	vertical-align:middle;
+   }
+
+div.absolute {
+    position: fixed;
+    left: 36%;
+    top: 37%;
+    width: 400px;
+    height: 100px;
+    border: 2px solid black;
+    text-align:center; 
+    font-size: 16px;
+    background-color: #D3D3D3;
+}
+
+.button1 {
+    background-color: gray; 
+    border: none;
+    color: white;
+    padding: 10px 25px; 
+}
+
+div p.bomb-message {
+	
+	margin:auto;
+	
+	
+	width: 200px;
+    height: 25px;
+    border: 2px solid black;
+    text-align:center;
+    font-size: 16px;
+    background-color: #D3D3D3;
+}
+
+#container-table-bomb-messege {
+    width:100%;
+    height:100%;
+    position:fixed;
 }
 

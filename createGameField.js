@@ -8,7 +8,7 @@ let SIZE,
     divParent,
     bombsCoordinates;
 
-// Надолежащее окончания для вывода количества бомб
+// Надлежащее окончания для вывода количества бомб
 function getNumEnding(iNumber) {   
     let aEndings = ['у','ы',''];
     var sEnding, i;
@@ -46,7 +46,7 @@ function selectColorForNumber(number) {
     }
 }
 
-// Установка класса всех ячеек таблицы clicked
+// Установка класса всех ячеек таблицы как clicked
 // Необходимо в конце игры
 function setAllClicked() {
     let tds = document.getElementsByTagName('td');

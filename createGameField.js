@@ -8,6 +8,7 @@ let SIZE,
     divParent,
     bombsCoordinates;
 
+// Надолежащее окончания для вывода количества бомб
 function getNumEnding(iNumber) {   
     let aEndings = ['у','ы',''];
     var sEnding, i;
@@ -29,6 +30,7 @@ function getNumEnding(iNumber) {
     return sEnding;
 }
 
+// Разный цвет для числа бомб
 function selectColorForNumber(number) {
     switch(number){
         case 1:
@@ -44,6 +46,8 @@ function selectColorForNumber(number) {
     }
 }
 
+// Установка класса всех ячеек таблицы clicked
+// Необходимо в конце игры
 function setAllClicked() {
     let tds = document.getElementsByTagName('td');
     for (let i = 0; i < tds.length; ++i) {
@@ -53,6 +57,7 @@ function setAllClicked() {
     }
 }
 
+// Проверка условия выигрыша
 function checkIfWin() {
     let clickedElements = document.getElementsByClassName("clicked");
 	//console.log(SIZE*SIZE - clickedElements.length, NUMBEROFBOMBS);
@@ -60,11 +65,13 @@ function checkIfWin() {
     return false;
 }
 
+// Удаления из DOM всплывающего окна о выигрыше/проигрыше
 function deletePopUpMenu() {
     body.removeChild(document.getElementById('popup-div'));
     newGame();
 }
 
+// Добавление в DOM всплывающего окна о выигрыше/проигрыше
 function showPopUpMenu(text) {
     setAllClicked();
     ISEND = true;
@@ -76,6 +83,7 @@ function showPopUpMenu(text) {
     body.appendChild(div);
 }
 
+// Установка флага на ячейку
 function setFlag(cell){
     //console.log(checkIfWin());
     if (!ISEND && (cell.tagName === 'TD') ) {
@@ -98,7 +106,7 @@ function setFlag(cell){
     }
 }
 
-
+// На правый клик - установка флажка
 function rightclick(cell) {
     let rightclick;
     let e = window.event;
@@ -107,45 +115,38 @@ function rightclick(cell) {
     setFlag(cell);
 }
 
+// Вызывается при клике на ячейку
 function cellClicked(cell){
-            if (!cell.classList.contains('clicked') && (cell.tagName === 'TD')
-				&& (!cell.classList.contains('flag'))){
-                if (find(bombsCoordinates, [cell.cellIndex, cell.parentNode.rowIndex])){
-                    cell.innerHTML += '&#9881';
-                    cell.className = "red";
-                    //cell.classList.add('t')
-                    cell.classList.add('clicked');
+    if (!cell.classList.contains('clicked') && (cell.tagName === 'TD')
+		&& (!cell.classList.contains('flag'))){
+        if (find(bombsCoordinates, [cell.cellIndex, cell.parentNode.rowIndex])){
+            cell.innerHTML += '&#9881';
+            cell.className = "red";
+            cell.classList.add('clicked');
                     // GAME OVER
-
-                    showPopUpMenu('Вы проиграли!');
-                } else {
-                    let bombNumber = numberOfBombsNear(cell);
-                    if (bombNumber === 0) {
-                        cell.className = 'grey';
-
-                        cell.classList.add('clicked');
-                        emptyCell(cell);
-                    }
-                    else {
-                       //cell.classList.add(selectColorForNumber(bombNumber));
-					   cell.style.color = selectColorForNumber(bombNumber);
-                       cell.innerHTML += bombNumber;
-					   
-                       cell.style.color = selectColorForNumber(bombNumber);
-                       cell.classList.add('clicked');
-                    }
-                    if (checkIfWin()) {
-                        showPopUpMenu('Вы выиграли!');
-                    }
+            showPopUpMenu('Вы проиграли!');
+        } else {
+                let bombNumber = numberOfBombsNear(cell);
+                if (bombNumber === 0) {
+                    cell.className = 'grey';
+                    cell.classList.add('clicked');
+                    emptyCell(cell);
                 }
-
-            } /*else {
-               cell.classList.add('clicked');
+                else {
+					cell.style.color = selectColorForNumber(bombNumber);
+                    cell.innerHTML += bombNumber;
+                    cell.style.color = selectColorForNumber(bombNumber);
+                    cell.classList.add('clicked');
+                    }
+                if (checkIfWin()) {
+                    showPopUpMenu('Вы выиграли!');
+                }
             }
-			console.log(checkIfWin());*/
+
+        }
 }
 
-
+// Если бомб рядом с ячейкой не оказалось
 function emptyCell(cell){
 
     for (let i = cell.cellIndex-1; i <= cell.cellIndex + 1; i++) {
@@ -178,6 +179,7 @@ function emptyCell(cell){
     }
 }
 
+// Вычисляет число бомб рядом с ячейкой
 function numberOfBombsNear(cell){
     let count = 0;
     for (let i = cell.cellIndex-1; i <= cell.cellIndex + 1; i++) {
@@ -193,6 +195,7 @@ function numberOfBombsNear(cell){
     return count;
 }
 
+// Отрисовка оставшегося числа бомб 
 function showBombsNumber(bombs) {
     let template = document.getElementById('template-bomb-number');
     let div = document.createElement('div');
@@ -203,6 +206,7 @@ function showBombsNumber(bombs) {
     //divParent.appendChild(div);
 }
 
+// Обновление числа оставшихся бомб
 function updateBombsNumber(bombs) {
     let div = document.getElementById('div-bomb-message');
     if (div) divParent.removeChild(div);
@@ -210,6 +214,7 @@ function updateBombsNumber(bombs) {
     showBombsNumber(bombs)
 }
 
+// Создание поля
 function tableCreate(n) {
     
     divParent = document.createElement('div');
@@ -247,10 +252,12 @@ function find(array, value) {
       return false;
     }
 
+// Генерация случайной координаты
 function getRandomCoordinate() {
   return [Math.floor(Math.random() * (SIZE)), Math.floor(Math.random() * (SIZE))];
 }
 
+// Генерация неповторяющихся случайных координат
 function generateBombsCoordinates () {
     let arrayRandomNumbers = [],
         N = NUMBEROFBOMBS;
@@ -264,6 +271,7 @@ function generateBombsCoordinates () {
     return arrayRandomNumbers;
 }
 
+// Для каждой новой игры
 function newGame() {
     SIZE = Number(prompt('Введите размер поля ', 10));
     NUMBEROFBOMBS = Number(prompt('Введите количество бомб', 8));

@@ -4,20 +4,21 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
     <body>
-
+        <!--Шаблон для вывода сообщения о конце игрыс предложением сыграть еще-->
     	<script type="text/x-template" id="template-popup">
     		<div class="popup-body">
-    		<p>{{text}}</p>
+    		  <p>{{text}}</p>
     		<button class ="button1" onclick="deletePopUpMenu()">Сыграть еще!</button>
     		</div>
 		</script>
-		
+
+		<!--Шаблон для вывода количества бомб-->
     	<script type="text/x-template" id="template-bomb-number">
 				<p class="bomb-message"> Нужно найти <strong>{{bomb_number}}</strong> бомб{{end}} </p>
 		</script>
 
-		
-    	<script src="tableCreate.js"></script>
+		<!--Создание поля с игрой-->
+    	<script src="createGameField.js"></script>
 		
     </body>
 </html>

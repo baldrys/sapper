@@ -7,17 +7,17 @@
         <!--Шаблон для вывода сообщения о конце игрыс предложением сыграть еще-->
     	<script type="text/x-template" id="template-popup">
     		<div class="popup-body">
-    		  <p>{{text}}</p>
-    		<button class ="button1" onclick="deletePopUpMenu()">Сыграть еще!</button>
+    			<p>{{text}}</p>
+    			<button class ="button1" onclick="deletePopUpMenu()">Сыграть еще!</button>
     		</div>
-		</script>
+	</script>
 
-		<!--Шаблон для вывода количества бомб-->
+	<!--Шаблон для вывода количества бомб-->
     	<script type="text/x-template" id="template-bomb-number">
-				<p class="bomb-message"> Нужно найти <strong>{{bomb_number}}</strong> бомб{{end}} </p>
-		</script>
+		<p class="bomb-message"> Нужно найти <strong>{{bomb_number}}</strong> бомб{{end}} </p>
+	</script>
 
-		<!--Создание поля с игрой-->
+	<!--Создание поля с игрой-->
     	<script src="createGameField.js"></script>
 		
     </body>
